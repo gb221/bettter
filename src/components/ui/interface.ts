@@ -1,8 +1,4 @@
-import * as $ from 'jquery'
-
-import * as localStorage from '../storage/local'
-import { HIDDEN_SHOT_THRESHOLD } from '../../types/enums'
-import { checkHasHideAction, removeProfileByID, removeShotByID } from './utils'
+import { checkHasHideAction } from './utils'
 
 // Hide icon html
 let html = `
@@ -29,19 +25,4 @@ export function addHideActionAllShots() {
         }
 
     }
-}
-
-export function updateUI() {
-    localStorage.getHiddenShots()
-        .then(profiles => {
-            for (const profile of profiles) {
-                for (const shot of profile.hidden_shots) {
-                    removeShotByID(shot.shot_id)
-                }
-
-                if (profile.hidden_shots.length >= HIDDEN_SHOT_THRESHOLD) {
-                    removeProfileByID(profile.profile_id)
-                }
-            }
-        })
 }

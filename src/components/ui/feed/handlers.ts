@@ -1,6 +1,7 @@
 import * as $ from 'jquery'
 
-import { addHideActionAllShots, updateUI } from '../interface'
+import { addHideActionAllShots } from '../interface'
+import { updateUI } from './interface'
 
 // On icon click
 $('.shots-grid').on('click', '#bettter-hide', (e) => {

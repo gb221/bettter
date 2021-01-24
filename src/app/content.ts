@@ -1,7 +1,8 @@
 import '../components/ui/feed/handlers'
 import '../components/ui/profile/handlers'
 
-import { addHideActionAllShots, updateUI } from '../components/ui/interface'
+import { addHideActionAllShots } from '../components/ui/interface'
+import * as feed from '../components/ui/feed/interface'
 
 chrome.runtime.sendMessage({}, (response) => {
     var checkReady = setInterval(() => {
@@ -10,7 +11,7 @@ chrome.runtime.sendMessage({}, (response) => {
             console.log("We're in the injected content script!")
 
             // Update UI
-            updateUI()
+            feed.updateUI()
 
             // Load up inital shot icons
             addHideActionAllShots()
