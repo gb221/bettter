@@ -1,6 +1,7 @@
 import * as localStorage from '../../storage/local'
-import { HIDDEN_SHOT_THRESHOLD } from '../../../types/enums'
 import { removeProfileByID, removeShotByID } from '../utils'
+
+export { root as rootHandler } from './handlers'
 
 export function updateUI() {
     localStorage.getHiddenShots()
@@ -10,7 +11,7 @@ export function updateUI() {
                     removeShotByID(shot.shot_id)
                 }
 
-                if (profile.hidden_shots.length >= HIDDEN_SHOT_THRESHOLD) {
+                if (profile.is_hidden) {
                     removeProfileByID(profile.profile_id)
                 }
             }

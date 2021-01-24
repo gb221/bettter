@@ -1,8 +1,10 @@
-import '../components/ui/feed/handlers'
-import '../components/ui/profile/handlers'
+import { pageType } from '../components/page/utils'
+import { addHideActionAllShots } from '../components/page/interface'
+import * as feed from '../components/page/feed/interface'
+import * as profile from '../components/page/profile/interface'
 
-import { addHideActionAllShots } from '../components/ui/interface'
-import * as feed from '../components/ui/feed/interface'
+let path = window.location.pathname
+let type = pageType(path)
 
 chrome.runtime.sendMessage({}, (response) => {
     var checkReady = setInterval(() => {
@@ -10,11 +12,22 @@ chrome.runtime.sendMessage({}, (response) => {
             clearInterval(checkReady)
             console.log("We're in the injected content script!")
 
-            // Update UI
-            feed.updateUI()
+            switch (type) {
+                case 'feed':
+                    feed.rootHandler()
+                    feed.updateUI()
+                    addHideActionAllShots()
+                    break;
 
-            // Load up inital shot icons
-            addHideActionAllShots()
+                case 'profile':
+                    profile.rootHandler()
+                    profile.updateUI()
+                    addHideActionAllShots()
+                    break;
+            
+                default:
+                    break;
+            }            
         }
     })
 })

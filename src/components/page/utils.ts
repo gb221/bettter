@@ -15,11 +15,8 @@ export function removeShotByID(shotID: Shot['shot_id']) {
 export function removeProfileByID(profileID: Profile['profile_id']) {
     let profileInfos = $('.shot-thumbnail').find('.user-information')
     
-    for (const profile of profileInfos) {
-        console.log('profile', profile)
-        
+    for (const profile of profileInfos) {        
         let href = $(profile).find('a:first').attr('href')
-        console.log('href', href)
 
         let re = /[^\/]*$/g
         let id = href.match(re)[0]
@@ -28,5 +25,21 @@ export function removeProfileByID(profileID: Profile['profile_id']) {
             let thumbnail = $(profile).closest('.shot-thumbnail')
             thumbnail.remove()
         }
+    }
+}
+
+export function pageType(path: string): 'feed' | 'profile' | 'shot' {
+    if (path === '/') {
+        return 'feed'
+    }
+
+    let folders = path.split('/')
+
+    if (folders[1] === 'shots' && !isNaN(parseInt(folders[2]))) {
+        return 'shot'
+    } else if (folders[1] === 'shots') {
+        return 'feed'
+    } else {
+        return 'profile'
     }
 }

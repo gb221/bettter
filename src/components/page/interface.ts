@@ -1,3 +1,5 @@
+import * as $ from 'jquery'
+
 import { checkHasHideAction } from './utils'
 
 // Hide icon html

@@ -5,5 +5,6 @@ interface Shot {
 
 interface Profile {
     profile_id: string,
-    hidden_shots: Shot[]
+    hidden_shots: Shot[],
+    is_hidden: boolean
 }
