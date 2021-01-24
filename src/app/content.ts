@@ -1,6 +1,7 @@
-import './ui/handlers'
+import '../components/ui/feed/handlers'
+import '../components/ui/profile/handlers'
 
-import { addHideActionAllShots, updateUI } from './ui/interface'
+import { addHideActionAllShots, updateUI } from '../components/ui/interface'
 
 chrome.runtime.sendMessage({}, (response) => {
     var checkReady = setInterval(() => {
